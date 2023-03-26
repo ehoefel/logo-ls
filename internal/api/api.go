@@ -197,7 +197,7 @@ func Bootstrap() {
 	case "RFC850":
 		timeFormate = time.RFC850
 	default:
-		timeFormate = time.Stamp
+    timeFormate = "02/01 15:04";
 	}
 
 	// set -h flag
