@@ -115,7 +115,24 @@ func New(d *os.File) (*dir, error) {
 		f.size = v.Size()
 		f.modTime = v.ModTime()
 		if long {
-			f.mode = v.Mode().String()
+      modestring := v.Mode().String()
+      modestring = modestring[1:4]
+      f.mode = ""
+      if modestring[0] == 'r' {
+        f.mode += "󰬙 "
+      } else {
+        f.mode += "󰰞 "
+      }
+      if modestring[1] == 'w' {
+        f.mode += "󰬞 "
+      } else {
+        f.mode += "󰰭 "
+      }
+      if modestring[2] == 'x' {
+        f.mode += "󰬟 "
+      } else {
+        f.mode += "󰰰 "
+      }
 			f.modeBits = uint32(v.Mode())
 			f.owner, f.group = getOwnerGroupInfo(v)
 		}
@@ -286,7 +303,7 @@ func (d *dir) Print() *bytes.Buffer {
 			if api.FlagVector&api.Flag_s > 0 {
 				w.AddRow(getSizeInFormate(v.blocks*512), v.mode, v.owner, v.group, getSizeInFormate(v.size), v.modTime.Format(api.GetTimeFormate()), v.icon, v.name+v.ext+v.indicator, v.gitStatus)
 			} else {
-				w.AddRow("", v.mode, v.owner, v.group, getSizeInFormate(v.size), v.modTime.Format(api.GetTimeFormate()), v.icon, v.name+v.ext+v.indicator, v.gitStatus)
+        w.AddRow("", v.mode, "", "", getSizeInFormate(v.size), v.modTime.Format(api.GetTimeFormate()), v.icon, v.name+v.ext+v.indicator, v.gitStatus)
 			}
 			w.IconColor(v.iconColor)
 		}

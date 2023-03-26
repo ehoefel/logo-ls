@@ -29,8 +29,8 @@ func (l *LongCTW) AddRow(args ...string) {
 		return
 	}
 	for i, v := range args {
-		if l.c[i] < len(v) {
-			l.c[i] = len(v)
+		if l.c[i] < len([]rune(v)) {
+			l.c[i] = len([]rune(v))
 		}
 	}
 	l.d = append(l.d, args)

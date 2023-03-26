@@ -87,7 +87,7 @@ func Bootstrap() {
 
 	f_r := getopt.BoolLong("reverse", 'r', "reverse order while sorting")
 	f_R := getopt.BoolLong("recursive", 'R', "list subdirectories recursively")
-	f_T := getopt.EnumLong("time-style", 'T', []string{"Stamp", "StampMilli", "Kitchen", "ANSIC", "UnixDate", "RubyDate", "RFC1123", "RFC1123Z", "RFC3339", "RFC822", "RFC822Z", "RFC850"}, "Stamp", "time/date format with -l; see time-style below")
+	f_T := getopt.EnumLong("time-style", 'T', []string{"Stamp", "StampMini", "StampMilli", "Kitchen", "ANSIC", "UnixDate", "RubyDate", "RFC1123", "RFC1123Z", "RFC3339", "RFC822", "RFC822Z", "RFC850"}, "Stamp", "time/date format with -l; see time-style below")
 
 	f_help := getopt.BoolLong("help", '?', "display this help and exit")
 	f_V := getopt.BoolLong("version", 'V', "output version information and exit")
@@ -170,6 +170,8 @@ func Bootstrap() {
 
 	// set time formate
 	switch *f_T {
+  case "StampMini":
+    timeFormate = "02/01 15:04";
 	case "Stamp":
 		timeFormate = time.Stamp
 	case "StampMilli":
